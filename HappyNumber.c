@@ -1,25 +1,27 @@
 #include <stdio.h>
 void main(){
-    int n ,firstLoopNum ,count ,firstLoopTemp ,innerLoopNum ,innerLoopTemp;
+    int mainNumber,n ,firstLoopNum ,count=0 ,firstLoopTemp ,innerLoopNum ,innerLoopTemp;
     printf("Enter a number : ");
-    scanf("%d",&n);
-
+    scanf("%d",&mainNumber);
+    n=mainNumber;
     while(n!=1){
-        count=firstLoopTemp=0 ,firstLoopNum=innerLoopNum=n ;
+        firstLoopTemp=0 ,firstLoopNum=n ,innerLoopNum=mainNumber;
 
         while(firstLoopNum>0){
-            firstLoopTemp = ((firstLoopNum%10)*(firstLoopNum%10));
+            firstLoopTemp = firstLoopTemp + ((firstLoopNum%10)*(firstLoopNum%10));
             firstLoopNum/=10;
-            count++;
         }
-
+        count++;
+        printf("%d ,",firstLoopTemp);
         for(int i=0 ;i<count-1 ;i++){
+            innerLoopTemp=0;
             while(innerLoopNum>0){
-                innerLoopTemp =  ((innerLoopNum%10)*(innerLoopNum%10));
+                innerLoopTemp = innerLoopTemp + ((innerLoopNum%10)*(innerLoopNum%10));
                 innerLoopNum/=10;
             }
+            // printf("inner : %d\n",innerLoopTemp);
             if(innerLoopTemp==firstLoopTemp) {
-                printf("Number is not happy");
+                printf("\nNumber is not happy bacause '%d' is repeat",innerLoopTemp);
                 count=-1;
                 break;
             }     
@@ -28,5 +30,5 @@ void main(){
         n=firstLoopTemp;
         if(count==-1) break;
     }
-    if(n==1) printf("Number is happy");
+    if(n==1) printf("\nNumber is happy");
 }
